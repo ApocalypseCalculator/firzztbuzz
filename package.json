@@ -1,0 +1,35 @@
+{
+  "name": "firzztbuzz",
+  "description": "A simple buzzer app",
+  "version": "0.0.1",
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc --build",
+    "start": "node dist/index.js",
+    "run": "tsc --build && node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ApocalypseCalculator/firzztbuzz.git"
+  },
+  "keywords": [
+    "buzzer"
+  ],
+  "author": "ApocalypseCalculator",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ApocalypseCalculator/firzztbuzz/issues"
+  },
+  "homepage": "https://github.com/ApocalypseCalculator/firzztbuzz#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "nanoid": "^3.3.1",
+    "socket.io": "^4.4.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
+    "typescript": "^4.6.3"
+  }
+}
