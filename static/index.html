@@ -9,6 +9,13 @@
 
 <body>
   <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
+  <script>
+      var socket = io();
+      function log(content) {document.writeln(content)}
+      socket.on('auth', log);
+      socket.on('error', log);
+      socket.on('leave', log);
+  </script>
 </body>
 
 </html>

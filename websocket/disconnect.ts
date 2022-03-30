@@ -1,8 +1,4 @@
 import { WebSocketFunction } from "../types/index";
-import { nanoid } from "nanoid";
-import { User, Room } from "../types";
-import * as jwt from "jsonwebtoken";
-import * as config from '../config.json';
 
 export default new WebSocketFunction({
     id: "disconnect",

@@ -1,13 +1,37 @@
 import { Socket } from "socket.io";
-import { DefaultEventsMap } from "socket.io/dist/typed-events";
 import ServerInstance from "./serverinstance";
+import * as jwt from "jsonwebtoken";
+import * as config from '../config.json';
 
 export default class WebSocketFunction {
     id: string;
-    call: (content: any, socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>, server: ServerInstance) => void;
+    call: (content: any, socket: Socket, server: ServerInstance) => void;
 
-    constructor({ id, call }: { id: string, call: (content: any, socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>, server: ServerInstance) => void }) {
+    constructor({ id, call, auth }:
+        {
+            id: string,
+            call: (content: any, socket: Socket, server: ServerInstance) => void
+            auth?: boolean
+        }) {
         this.id = id;
-        this.call = call;
+        this.call = (content: any, socket: Socket, server: ServerInstance) => {
+            if (!auth) {
+                call(content, socket, server);
+            }
+            else if (content && content.auth) {
+                jwt.verify(content.auth, config.token_secret, function (err: any, decoded: any) {
+                    if (err) {
+                        socket.emit('error', 'Authorization error');
+                    }
+                    else {
+                        content.authUser = decoded;
+                        call(content, socket, server);
+                    }
+                });
+            }
+            else {
+                socket.emit('error', 'No authorization');
+            }
+        };
     }
 }
