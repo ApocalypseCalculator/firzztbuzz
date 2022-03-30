@@ -2,6 +2,7 @@ import { Socket } from "socket.io";
 import ServerInstance from "./serverinstance";
 import * as jwt from "jsonwebtoken";
 import * as config from '../config.json';
+import User from "./user";
 
 export default class WebSocketFunction {
     id: string;
@@ -24,7 +25,7 @@ export default class WebSocketFunction {
                         socket.emit('error', 'Authorization error');
                     }
                     else {
-                        content.authUser = decoded;
+                        content.authUser = decoded as User;
                         call(content, socket, server);
                     }
                 });
