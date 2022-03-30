@@ -14,6 +14,11 @@ export default new WebSocketFunction({
                 server.roomMap.get(user.room)!.buzzer.time = 0;
                 socket.emit("message", "success");
             }
+            else if(content.action === "start") {
+                server.roomMap.get(user.room)!.buzzer.started = true;
+                server.roomMap.get(user.room)!.buzzer.time = Date.now();
+                socket.emit("message", "success");
+            }
             else if(content.action === "setpublic") {
                 server.roomMap.get(user.room)!.buzzer.ispublic = true;
                 socket.emit("message", "success");

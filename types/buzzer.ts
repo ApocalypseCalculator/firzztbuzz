@@ -1,6 +1,6 @@
 export default class Buzzer {
     started: boolean;
-    time: Number;
+    time: number;
     textrequired: boolean;
     ispublic: boolean;
     constructor() {
