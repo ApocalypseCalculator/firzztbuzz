@@ -12,6 +12,9 @@ export default new WebSocketFunction({
                         server.server.sockets.to(`${v.socket}`).emit('leave', `${user?.name}`);
                     }
                 })
+                if(server.roomMap.get(user.room)!.users.size == 0) {
+                    server.roomMap.delete(user.room);
+                }
             }
         }
     }
